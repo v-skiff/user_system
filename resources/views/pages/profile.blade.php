@@ -89,24 +89,6 @@
                                    @enderror
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="password" class="form-control" id="password" name="password"
-                                           placeholder="Password">
-                                   @error('password')
-                                       {{ $message }}
-                                   @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
-                                           placeholder="Confirm password">
-                                   @error('password_confirmation')
-                                       {{ $message }}
-                                   @enderror
-                                </div>
-                            </div>
 
                             <button type="submit" class="btn send-btn">Update</button>
 
