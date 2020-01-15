@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -68,5 +69,30 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function registerForm()
+    {
+        return view('pages.register');
+    }
+
+    public function register(Request $request)
+    {
+        $this->validate($request, [
+            'login' => 'required|min:3|max:50|unique:users',
+            'email' => 'required|email|max:80|unique:users',
+            'password' => 'required|max:30|confirmed',
+            'full_name' => 'required',
+            'birthday' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
+        ]);
+
+        $user = User::add($request->all());
+        $user->generatePassword($request->get('password'));
+
+        return redirect('/login');
     }
 }
